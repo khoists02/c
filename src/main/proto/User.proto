@@ -1,0 +1,15 @@
+syntax = "proto3";
+package proto;
+option java_package = "com.school.management";
+option java_outer_classname = "UserProto";
+import "Generic.proto";
+
+message UserResponse {
+    string username = 1;
+    string email = 2;
+}
+
+message UserResponses {
+    repeated UserResponse content = 1;
+    PageableResponse pageable = 2;
+}
