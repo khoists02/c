@@ -13,11 +13,11 @@ import java.util.Objects;
 @Entity
 @Table(name = "user_roles")
 public class UserRole extends BaseEntity implements Serializable {
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private Role role;
 

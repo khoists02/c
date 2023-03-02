@@ -4,11 +4,9 @@ import com.school.management.application.support.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Getter
@@ -16,6 +14,8 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "roles")
 public class Role extends BaseEntity {
+    @NotNull
+    @Column(name = "name", unique = true)
     private String name;
 
     @OneToMany(

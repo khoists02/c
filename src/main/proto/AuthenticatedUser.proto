@@ -1,0 +1,12 @@
+syntax = "proto3";
+package proto;
+option java_package = "com.school.management";
+option java_outer_classname = "AuthenticatedUserProto";
+
+message AuthenticatedUser {
+    string id = 1;
+    string username = 2;
+    string email = 3;
+    bool owner = 4;
+    repeated string permissions = 5;
+}

@@ -14,24 +14,24 @@ import java.util.Objects;
 @Table(name = "role_permissions")
 public class RolePermission extends BaseEntity implements Serializable {
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "permission_id")
     private Permission permission;
 
     public RolePermission() {}
 
-    public RolePermission(Role roles, Permission permission) {
+    public RolePermission(Role role, Permission permission) {
         this.role = role;
         this.permission = permission;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(permission, role);
+        return Objects.hash(role, permission);
     }
 
     @Override

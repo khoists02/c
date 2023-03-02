@@ -25,10 +25,10 @@ import java.util.Optional;
 public class UsersController {
 
     @Autowired
-    private UsersService usersService;
+    public UsersService usersService;
 
     @Autowired
-    private ModelMapper mapper;
+    public ModelMapper mapper;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)

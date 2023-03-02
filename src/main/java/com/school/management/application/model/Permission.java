@@ -9,14 +9,14 @@ import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "permissions")
 @Getter
 @Setter
+@Entity
+@Table(name = "permissions")
 public class Permission extends BaseEntity {
 
     @NotNull
-    @Column(name = "code")
+    @Column(name = "code", unique = true)
     private String code;
 
     @NotNull

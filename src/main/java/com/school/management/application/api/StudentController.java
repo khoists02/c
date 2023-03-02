@@ -26,9 +26,9 @@ import java.util.Optional;
 @RequestMapping("/api/v1/students")
 public class StudentController {
     @Autowired
-    private ModelMapper mapper;
+    public ModelMapper mapper;
     @Autowired
-    private PlayStationService playStationService;
+    public PlayStationService playStationService;
 
     @GetMapping("playstations")
     public ResponseEntity<List<Playstation>> getPlaystationsInRange(@RequestParam("date") String date) throws HttpServerErrorException, DateTimeParseException {
