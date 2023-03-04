@@ -3,10 +3,31 @@ package proto;
 option java_package = "com.school.management";
 option java_outer_classname = "AuthenticatedUserProto";
 
-message AuthenticatedUser {
+message AuthenticatedUserResponse {
     string id = 1;
     string username = 2;
     string email = 3;
     bool owner = 4;
     repeated string permissions = 5;
+}
+
+message Token {
+    string token = 1;
+}
+
+message AuthenticateRequest {
+    string username = 1;
+    string password = 2;
+}
+
+
+message RegisterUserRequest {
+    string username = 1;
+    string password = 2;
+    string comparePassword = 3;
+    string email = 4;
+}
+
+message RegisterUserResponse {
+    string username = 1;
 }

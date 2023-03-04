@@ -45,6 +45,13 @@ public class User extends BaseEntity {
     )
     private Set<UserRole> userRoles = new HashSet<>();
 
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy ="user",
+            cascade = {CascadeType.ALL}
+    )
+    private Set<UserSession> userSessions = new HashSet<>();
+
     public void addRole(Role role) { this.userRoles.add(new UserRole(this, role)); };
 
     public void removeRole(Role role) {  this.userRoles.remove(new UserRole(this, role)); }

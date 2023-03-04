@@ -7,6 +7,7 @@ import com.school.management.application.criteria.PlaystationsSearchCriteria;
 import com.school.management.application.criteria.UsersSearchCriteria;
 import com.school.management.application.model.Playstation;
 import com.school.management.application.model.User;
+import com.school.management.application.services.AuthenticationService;
 import com.school.management.application.services.UsersService;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -32,6 +34,7 @@ public class UsersController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasPermission('ViewStudy')")
     public UserProto.UserResponses getAll(
             @RequestParam(name = "keyword") Optional<String> keyword,
             @PageableDefault(sort = "username") Pageable pageable

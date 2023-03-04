@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
-@EntityScan("com.school.management.application")
-@ComponentScan("com.school.management.application")
-@EnableJpaRepositories(repositoryFactoryBeanClass = MyJpaRepositoryFactoryBean.class, basePackages = "com.school.management.application")
+@EntityScan("com.school.management")
+@ComponentScan("com.school.management")
+@EnableJpaRepositories(repositoryFactoryBeanClass = MyJpaRepositoryFactoryBean.class, basePackages = "com.school.management")
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class}, scanBasePackages = {"com.school.management"})
 public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
