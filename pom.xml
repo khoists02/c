@@ -10,7 +10,6 @@
 	</parent>
 	<groupId>com.school.management</groupId>
 	<artifactId>application</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>application</name>
 	<description>Project to manage students and course</description>
 	<properties>

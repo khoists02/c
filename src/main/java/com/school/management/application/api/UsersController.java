@@ -17,13 +17,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@Validated
 @RestController
 @RequestMapping("/api/v1/users")
-@Transactional
 public class UsersController {
 
     @Autowired
@@ -33,7 +34,6 @@ public class UsersController {
     public ModelMapper mapper;
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasPermission('ViewStudy')")
     public UserProto.UserResponses getAll(
             @RequestParam(name = "keyword") Optional<String> keyword,

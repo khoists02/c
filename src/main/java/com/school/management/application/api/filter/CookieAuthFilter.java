@@ -36,6 +36,7 @@ public class CookieAuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        System.out.println("Try CookieAuthFilter");
         if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
             filterChain.doFilter(request, response); // Config authenticated request like auth/ /language
             return;
