@@ -8,6 +8,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NoArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -20,21 +22,19 @@ import java.io.IOException;
 @Component
 @NoArgsConstructor
 public class FilterChainExceptionHandler extends OncePerRequestFilter {
+    private Logger logger = LoggerFactory.getLogger(FilterChainExceptionHandler.class);
     @Autowired
     @Qualifier("handlerExceptionResolver")
     private HandlerExceptionResolver exceptionHandlerResolver;
-    @Autowired
-    private CorsFilter corsFilter;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
-            System.out.println("Try FilterChainExceptionHandler");
+            this.logger.info("Do FilterChainExceptionRequest");
             filterChain.doFilter(request, response);
         } catch (Exception e) {
-            System.out.println("Exception FilterChainExceptionHandler");
+            this.logger.error("Exception FilterChainExceptionHandler %s", e.getLocalizedMessage());
             exceptionHandlerResolver.resolveException(request, response, null, e);
-//            throw new ApplicationException();
         }
     }
 

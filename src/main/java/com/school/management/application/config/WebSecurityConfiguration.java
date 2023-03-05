@@ -38,9 +38,11 @@ public class WebSecurityConfiguration {
         /***
          * Extends from onceperrequest => run one by one !!!
          * */
-        http.addFilterAfter(beanFactory.createBean(FilterChainExceptionHandler.class), CsrfFilter.class); // CsrfFilter run first => FilterChainExceptionHandler run seconds
-        http.addFilterAfter(beanFactory.createBean(CookieAuthFilter.class), FilterChainExceptionHandler.class); // AuthorizationFilter run first => CookieAuthFilter Run seconds
-        http.addFilterAfter(beanFactory.createBean(FilterChainExceptionHandler.class), AuthorizationFilter.class); // FilterChainExceptionHandler run first => CookieAuthFilter Run seconds
+//        http.addFilterAfter(beanFactory.createBean(FilterChainExceptionHandler.class), CsrfFilter.class); // CsrfFilter run first => FilterChainExceptionHandler run seconds
+//        http.addFilterAfter(beanFactory.createBean(CookieAuthFilter.class), FilterChainExceptionHandler.class); // AuthorizationFilter run first => CookieAuthFilter Run seconds
+//        http.addFilterAfter(beanFactory.createBean(FilterChainExceptionHandler.class), AuthorizationFilter.class); // FilterChainExceptionHandler run first => CookieAuthFilter Run seconds
+        http.addFilterAfter(beanFactory.createBean(CookieAuthFilter.class), CsrfFilter.class);
+        http.addFilterAfter(beanFactory.createBean(FilterChainExceptionHandler.class), AuthorizationFilter.class);
         http.csrf().ignoringRequestMatchers("/api/v1/auth/**");
         http.exceptionHandling().authenticationEntryPoint(unauthenticatedHandler).accessDeniedHandler(unauthoriseHandler);
         http.authorizeHttpRequests().requestMatchers("/api/v1/auth/**").permitAll().anyRequest().authenticated();

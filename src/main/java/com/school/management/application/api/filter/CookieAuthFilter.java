@@ -4,15 +4,15 @@ import com.nimbusds.jose.proc.SecurityContext;
 import com.school.management.application.api.auth.AuthenticatedUser;
 import com.school.management.application.exceptions.UnauthenticatedException;
 import com.school.management.application.services.AuthenticationService;
-import com.school.management.application.support.RequestContext;
 import io.jsonwebtoken.*;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -25,6 +25,7 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class CookieAuthFilter extends OncePerRequestFilter {
+    private Logger logger = LoggerFactory.getLogger(CookieAuthFilter.class);
     @Autowired
     private AuthenticationService authenticationService;
 
@@ -35,8 +36,11 @@ public class CookieAuthFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("Try CookieAuthFilter");
+    protected void doFilterInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain) throws ServletException, IOException {
+        this.logger.info("CookieAuthFilter Filter");
         if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
             filterChain.doFilter(request, response); // Config authenticated request like auth/ /language
             return;

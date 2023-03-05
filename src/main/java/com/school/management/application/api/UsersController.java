@@ -34,7 +34,7 @@ public class UsersController {
     public ModelMapper mapper;
 
     @GetMapping
-    @PreAuthorize("hasPermission('ViewStudy')")
+    @PreAuthorize("hasPermission('viewUser')")
     public UserProto.UserResponses getAll(
             @RequestParam(name = "keyword") Optional<String> keyword,
             @PageableDefault(sort = "username") Pageable pageable
